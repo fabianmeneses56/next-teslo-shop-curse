@@ -14,7 +14,7 @@ import { ShopLayout } from '../../components/layouts'
 import { ProductSlideshow, SizeSelector } from '../../components/products'
 import { ItemCounter } from '../../components/ui'
 import { dbProducts } from '../../database'
-import { initialData } from '../../database/products'
+import { initialData } from '../../database/seed-data'
 
 import { IProduct, ICartProduct, ISize } from '../../interfaces'
 

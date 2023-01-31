@@ -11,7 +11,7 @@ import NextLink from 'next/link'
 import { useProducts } from '../hooks'
 import { ProductList } from '../components/products'
 import { ShopLayout } from '../components/layouts'
-import { initialData } from '../database/products'
+import { initialData } from '../database/seed-data'
 import { FullScreenLoading } from '../components/ui'
 
 export default function Home() {
