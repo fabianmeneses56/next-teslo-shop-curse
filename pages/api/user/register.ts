@@ -77,7 +77,6 @@ const registerUser = async (
   try {
     await newUser.save({ validateBeforeSave: true })
   } catch (error) {
-    console.log(error)
     return res.status(500).json({
       message: 'Revisar logs del servidor'
     })

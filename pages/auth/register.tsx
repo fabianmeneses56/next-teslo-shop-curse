@@ -16,7 +16,6 @@ import { useRouter } from 'next/router'
 import { AuthContext } from '../../context'
 import { AuthLayout } from '../../components/layouts'
 import { validations } from '../../utils'
-import { tesloApi } from '../../api'
 
 type FormData = {
   name: string
@@ -46,7 +45,8 @@ const RegisterPage = () => {
       return
     }
     // // Todo: navegar a la pantalla que el usuario estaba
-    router.replace('/')
+    const destination = router.query.p?.toString() || '/'
+    router.replace(destination)
   }
 
   return (
@@ -122,7 +122,15 @@ const RegisterPage = () => {
             </Grid>
 
             <Grid item xs={12} display='flex' justifyContent='end'>
-              <NextLink href='/auth/login' legacyBehavior passHref>
+              <NextLink
+                href={
+                  router.query.p
+                    ? `/auth/login?p=${router.query.p}`
+                    : '/auth/login'
+                }
+                legacyBehavior
+                passHref
+              >
                 <Link underline='always'>¿Ya tienes cuenta?</Link>
               </NextLink>
             </Grid>
