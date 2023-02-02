@@ -12,6 +12,8 @@ import {
 } from '@mui/material'
 import { ErrorOutline } from '@mui/icons-material'
 import { useRouter } from 'next/router'
+import { GetServerSideProps } from 'next'
+import { signIn, getSession } from 'next-auth/react'
 
 import { AuthContext } from '../../context'
 import { AuthLayout } from '../../components/layouts'
@@ -45,8 +47,9 @@ const RegisterPage = () => {
       return
     }
     // // Todo: navegar a la pantalla que el usuario estaba
-    const destination = router.query.p?.toString() || '/'
-    router.replace(destination)
+    // const destination = router.query.p?.toString() || '/'
+    // router.replace(destination)
+    await signIn('credentials', { email, password }) // con next auth
   }
 
   return (
@@ -139,6 +142,29 @@ const RegisterPage = () => {
       </form>
     </AuthLayout>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  query
+}) => {
+  const session = await getSession({ req })
+  // console.log({session});
+
+  const { p = '/' } = query
+
+  if (session) {
+    return {
+      redirect: {
+        destination: p.toString(),
+        permanent: false
+      }
+    }
+  }
+
+  return {
+    props: {}
+  }
 }
 
 export default RegisterPage
