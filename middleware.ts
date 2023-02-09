@@ -1,10 +1,14 @@
 // middleware.ts
 import { NextResponse, type NextRequest } from 'next/server'
 import { getToken } from 'next-auth/jwt'
+import { NextAuthOptions } from 'next-auth'
 import * as jose from 'jose'
 
 export async function middleware(req: NextRequest) {
-  const session = await getToken({ req, secret: process.env.NEXTAUTH_SECRET })
+  const session = (await getToken({
+    req,
+    secret: process.env.NEXTAUTH_SECRET
+  })) as any
 
   // if (!session) {
 

@@ -1,4 +1,4 @@
-import { FC, useReducer, useEffect } from 'react'
+import { FC, useReducer, useEffect, ReactNode } from 'react'
 import Cookies from 'js-cookie'
 import axios from 'axios'
 import { useRouter } from 'next/router'
@@ -17,8 +17,10 @@ const AUTH_INITIAL_STATE: AuthState = {
   isLoggedIn: false,
   user: undefined
 }
-
-export const AuthProvider: FC = ({ children }) => {
+interface Props {
+  children?: ReactNode
+}
+export const AuthProvider: FC<Props> = ({ children }) => {
   const router = useRouter()
   const [state, dispatch] = useReducer(authReducer, AUTH_INITIAL_STATE)
   const { data, status } = useSession()

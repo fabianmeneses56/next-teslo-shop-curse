@@ -14,7 +14,7 @@ const columns: GridColDef[] = [
   {
     field: 'isPaid',
     headerName: 'Pagada',
-    renderCell: ({ row }: GridValueGetterParams) => {
+    renderCell: ({ row }: any) => {
       return row.isPaid ? (
         <Chip variant='outlined' label='Pagada' color='success' />
       ) : (
@@ -31,14 +31,9 @@ const columns: GridColDef[] = [
   {
     field: 'check',
     headerName: 'Ver orden',
-    renderCell: ({ row }: GridValueGetterParams) => {
+    renderCell: ({ row }: any) => {
       return (
-        <a
-          href={`/admin/orders/${row.id}`}
-          target='_blank'
-          legacyBehavior
-          rel='noreferrer'
-        >
+        <a href={`/admin/orders/${row.id}`} target='_blank' rel='noreferrer'>
           Ver orden
         </a>
       )

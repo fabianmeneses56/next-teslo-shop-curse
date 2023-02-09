@@ -4,6 +4,12 @@ import Credentials from 'next-auth/providers/credentials'
 
 import { dbUsers } from '../../../database'
 
+declare module 'next-auth' {
+  interface Session {
+    accessToken?: string
+  }
+}
+
 export default NextAuth({
   // Configure one or more authentication providers
   providers: [
@@ -23,7 +29,7 @@ export default NextAuth({
           placeholder: 'Contraseña'
         }
       },
-      async authorize(credentials) {
+      async authorize(credentials): Promise<any> {
         console.log({ credentials })
         // return { name: 'Juan', correo: 'juan@google.com', role: 'admin' }
 
@@ -35,8 +41,8 @@ export default NextAuth({
     }),
 
     GithubProvider({
-      clientId: process.env.GITHUB_ID,
-      clientSecret: process.env.GITHUB_SECRET
+      clientId: process.env.GITHUB_ID as any,
+      clientSecret: process.env.GITHUB_SECRET as any
     })
   ],
 
@@ -84,7 +90,7 @@ export default NextAuth({
     async session({ session, token, user }) {
       // console.log({ session, token, user });
 
-      session.accessToken = token.accessToken
+      session.accessToken = token.accessToken as any
       session.user = token.user as any
 
       return session

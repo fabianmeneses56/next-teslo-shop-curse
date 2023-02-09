@@ -1,4 +1,4 @@
-import { FC, useEffect, useReducer } from 'react'
+import { FC, useEffect, useReducer, ReactNode } from 'react'
 import Cookie from 'js-cookie'
 import axios from 'axios'
 
@@ -25,7 +25,11 @@ const CART_INITIAL_STATE: CartState = {
   total: 0,
   shippingAddress: undefined
 }
-export const CartProvider: FC = ({ children }) => {
+
+interface Props {
+  children?: ReactNode
+}
+export const CartProvider: FC<Props> = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, CART_INITIAL_STATE)
 
   // Efecto

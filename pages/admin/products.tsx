@@ -11,7 +11,7 @@ const columns: GridColDef[] = [
   {
     field: 'img',
     headerName: 'Foto',
-    renderCell: ({ row }: GridValueGetterParams) => {
+    renderCell: ({ row }: any) => {
       return (
         <a href={`/product/${row.slug}`} target='_blank' rel='noreferrer'>
           <CardMedia
@@ -28,7 +28,7 @@ const columns: GridColDef[] = [
     field: 'title',
     headerName: 'Title',
     width: 250,
-    renderCell: ({ row }: GridValueGetterParams) => {
+    renderCell: ({ row }: any) => {
       return (
         <NextLink href={`/admin/products/${row.slug}`} legacyBehavior passHref>
           <Link underline='always'>{row.title}</Link>
